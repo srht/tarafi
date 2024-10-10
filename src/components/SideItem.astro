@@ -1,0 +1,22 @@
+---
+interface Props {
+	title: string;
+	body: string;
+	href: string;
+}
+import Card from './Card.astro'
+const { href, title, body } = Astro.props;
+---
+
+<ul class="flex">
+<Card
+				href="/side"
+				title="Pick Your Side"
+				body="Learn how Astro works and explore the official API docs."
+			/>
+			<Card
+				href="/profile"
+				title="Your Profile"
+				body="Supercharge your project with new frameworks and libraries."
+			/>
+</ul>

@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import SideItem from '../components/SideItem.astro';
 ---
 
 <Layout title="tarafi.">
@@ -39,13 +40,13 @@ import Card from '../components/Card.astro';
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
 		<ul role="list" class="link-card-grid">
-			<Card
-				href="/side"
+			<SideItem
+				href="https://docs.astro.build/"
 				title="Pick Your Side"
 				body="Learn how Astro works and explore the official API docs."
 			/>
-			<Card
-				href="/profile"
+			<SideItem
+				href="https://astro.build/integrations/"
 				title="Your Profile"
 				body="Supercharge your project with new frameworks and libraries."
 			/>
