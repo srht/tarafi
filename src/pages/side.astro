@@ -4,8 +4,9 @@ import Card from '../components/Card.astro';
 
 import { sql } from "@vercel/postgres";
 
-const likes = 100;
+const likes = 1;
 const { rows } = await sql`SELECT * FROM posts WHERE likes > ${likes};`;
+console.log(rows)
 
 ---
 
