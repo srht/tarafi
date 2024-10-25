@@ -2,30 +2,27 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 
-import { sql } from "@vercel/postgres";
+import { supabase } from '../lib/supabase'
 
-const likes = 1;
-const { rows } = await sql`SELECT * FROM posts WHERE likes > ${likes};`;
-console.log(rows)
+let randid=Math.floor(Math.random() * 2) + 1;
+console.log(randid)
 
+let { data: uanswers, error } = await supabase
+.from('useranswers')
+.select('id,useranswerid,uid,answers(id,questionid,answerdesc)')
+  .eq('answers.questionid',randid)
+  .eq('uid','srhtkrgl@gmail.com')
+
+  let dictionary:any[]=[]
+  console.log(uanswers)
 ---
 
 <Layout title="tarafi.">
-{JSON.stringify(rows, null, 2) }
+{JSON.stringify(dictionary, null, 2) }
 <p class="instructions">
-			Hangi takım?
+			Tarafini seç
 		</p>
 		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Galatasaray"
-				body="pick"
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Fenerbahçe"
-				body="profile"
-			/>
+		
 		</ul>
 </Layout>
-

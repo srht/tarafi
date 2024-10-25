@@ -1,37 +1,53 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import SideItem from '../components/SideItem.astro';
+
+import { supabase } from '../lib/supabase'
+
+let randid=Math.floor(Math.random() * 2) + 1;
+console.log(randid)
+
+let { data: uanswers, error } = await supabase
+  .from('answers')
+  .select('id,answerdesc, questionid')
+let dictionary:any[]=[]
+  uanswers?.map(u=>{
+	
+  })
+  console.log(dictionary)
 ---
 
 <Layout title="tarafi.">
+{JSON.stringify(dictionary, null, 2) }
 <p class="instructions">
-			Your picks...
+			Tarafini seç
 		</p>
-<ul role="list">
+		<ul role="list" class="link-card-grid">
+		{dictionary?.map(d=>{
+			let first= d.answers[0].useranswers.length>0?"link-card-selected link-card":"link-card";
+			let second= d.answers[1].useranswers.length>0?"link-card-selected link-card":"link-card";
 
-
-<li>
-<p class="instructions">
-			Pick your side....
-		</p>
-	<SideItem
-				href="https://docs.astro.build/"
-				title="Pick Your Side"
-				body="Learn how Astro works and explore the official API docs."
+			return(
+			<>
+				<Card
+				classlist={first}
+				href="javascript:;"
+				title={d&&d.answers[0].answerdesc}
+				body={d&&d.answers[0].id}
+				value={d&&d.answers[0].id}
+				id={d&&d.answers[0].useranswers[0].id}
 			/>
-</li>
-
-<li>
-<p class="instructions">
-			Pick your side....
-		</p>
-	<SideItem
-				href="https://docs.astro.build/"
-				title="Pick Your Side"
-				body="Learn how Astro works and explore the official API docs."
+			<Card
+			classlist={second}
+				href="javascript:;"
+				title={d&&d.answers[1].answerdesc}
+				body={d&&d.answers[1].id}
+				value={d&&d.answers[1].id}
+				id={d&&d.answers[1].useranswers[0].id}
 			/>
-</li>
-
+			</>
+			)
+		}
+			)}
 		</ul>
 </Layout>
